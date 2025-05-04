@@ -12,6 +12,8 @@ export async function Nav() {
     })
     .then((data) => data.items)
 
+  console.log(nav)
+
   return (
     <header className="full-bleed bg-slate-400 p-1">
       <nav className="flex gap-6">
