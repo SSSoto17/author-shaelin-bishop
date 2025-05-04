@@ -8,7 +8,6 @@ export async function Nav() {
     .findGlobal({
       slug: 'header', // required
       depth: 2,
-      showHiddenFields: true,
     })
     .then((data) => data.items)
 
