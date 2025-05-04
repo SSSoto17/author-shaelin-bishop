@@ -1,8 +1,40 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-test: oklch(0.72 0.11 178);
+}
+
+@layer base {
+  body {
+    --spacing: 1rem;
+    display: grid;
+    grid-template-columns: minmax(var(--spacing), 1fr) minmax(0, 1120px) minmax(var(--spacing), 1fr);
+    grid-template-rows: auto 1fr auto;
+    min-height: 100svh;
+
+    > header,
+    > main,
+    > footer {
+      grid-column: 2;
+    }
+  }
+}
+
+@utility full-bleed {
+  grid-column: 1 / 4;
+  display: grid;
+  grid-template-columns: subgrid;
+
+  > * {
+    grid-column: 2;
+  }
+}
+
 :root {
   --font-mono: 'Roboto Mono', monospace;
 }
 
-* {
+/* * {
   box-sizing: border-box;
 }
 
@@ -161,4 +193,4 @@ svg {
       border-radius: 4px;
     }
   }
-}
+} */

@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "author-shaelin-bishop",
   "version": "1.0.0",
   "description": "A blank template to get started with Payload 3.0",
   "license": "MIT",
@@ -15,17 +15,21 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
   "dependencies": {
-    "@payloadcms/next": "3.33.0",
-    "@payloadcms/payload-cloud": "3.33.0",
-    "@payloadcms/richtext-lexical": "3.33.0",
+    "@payloadcms/db-postgres": "3.36.1",
+    "@payloadcms/email-nodemailer": "^3.36.1",
+    "@payloadcms/next": "3.36.1",
+    "@payloadcms/payload-cloud": "3.36.1",
+    "@payloadcms/richtext-lexical": "3.36.1",
+    "@tailwindcss/postcss": "^4.1.5",
     "cross-env": "^7.0.3",
     "graphql": "^16.8.1",
     "next": "15.3.0",
-    "payload": "3.33.0",
+    "payload": "^3.36.1",
+    "postcss": "^8.5.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "sharp": "0.32.6",
-    "@payloadcms/db-postgres": "3.33.0"
+    "tailwindcss": "^4.1.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
@@ -34,7 +38,8 @@
     "@types/react-dom": "19.1.2",
     "eslint": "^9.16.0",
     "eslint-config-next": "15.3.0",
-    "prettier": "^3.4.2",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "typescript": "5.7.3"
   },
   "engines": {
