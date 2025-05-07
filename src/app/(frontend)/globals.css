@@ -41,6 +41,7 @@
   --text-2xl: clamp(2.0725rem, 1.7707rem + 1.5093vw, 2.8271rem);
   --text-3xl: clamp(2.7627rem, 2.2687rem + 2.4698vw, 3.9976rem);
   --text-4xl: clamp(3.6826rem, 2.8947rem + 3.9399vw, 5.6526rem);
+  --text-5xl: clamp(4.909rem, 3.6754rem + 6.1676vw, 7.9928rem);
 }
 
 @layer base {
@@ -67,7 +68,7 @@
   display: grid;
   grid-template-columns: subgrid;
 
-  > * {
+  > *:not(.full-bleed) {
     grid-column: 2;
   }
 }

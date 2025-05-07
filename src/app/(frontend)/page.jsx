@@ -13,15 +13,26 @@ export default async function Home() {
     .then((data) => data.image)
 
   return (
-    <main>
-      <section className="grid gap-2 py-2">
+    <main className="full-bleed">
+      <section className="full-bleed">
         <Image
           src={'http://localhost:3000' + heroImg.url}
           alt={heroImg.alt}
           width={heroImg.width}
           height={heroImg.height}
+          className="full-bleed h-screen object-cover"
         />
-        <h1 className="font-accent text-4xl font-bold tracking-tighter uppercase">Hello</h1>
+        <article className="grid gap-1 py-2">
+          <h1 className="font-accent text-5xl leading-6 font-extrabold tracking-tighter uppercase">
+            Nanum Gothic Coding
+          </h1>
+          <h2 className="text-xl font-extrabold">Nanum Myeongjo</h2>
+          <p className="max-w-prose tracking-wide">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad vitae, voluptatibus
+            repellendus enim, maiores vel animi neque id magni dolores adipisci accusantium
+            cupiditate ipsa est, excepturi dolorum. Et, eligendi repellendus!
+          </p>{' '}
+        </article>
       </section>
     </main>
   )

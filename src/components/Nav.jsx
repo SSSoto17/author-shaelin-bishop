@@ -21,7 +21,7 @@ export async function Nav() {
     .then((data) => data.items)
 
   return (
-    <header className="sticky top-0 full-bleed bg-accent-500 p-1 text-accent-50">
+    <header className="sticky top-0 full-bleed bg-neutral-50 p-1">
       <nav className="flex items-center justify-between">
         <Logo />
         <ul className="flex gap-4 font-logo tracking-tight">
