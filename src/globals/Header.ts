@@ -1,4 +1,4 @@
-import { GlobalConfig, User } from 'payload'
+import { GlobalConfig } from 'payload'
 
 export const Header: GlobalConfig = {
   slug: 'header',

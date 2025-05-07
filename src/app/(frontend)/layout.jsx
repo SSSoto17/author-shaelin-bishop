@@ -1,17 +1,36 @@
 import { Footer, Nav } from '@/components/Nav'
 import './globals.css'
 
+import { Nanum_Myeongjo, Nanum_Gothic_Coding, Nanum_Myeongjo, Raleway } from 'next/font/google'
+
+const nanum = Nanum_Myeongjo({
+  variable: '--font-main',
+  weight: ['400', '700', '800'],
+  subsets: ['latin'],
+})
+
+const nanumGothic = Nanum_Gothic_Coding({
+  variable: '--font-accent',
+  weight: ['400', '700'],
+  subsets: ['latin'],
+})
+
+const raleway = Raleway({
+  variable: '--font-logo',
+  subsets: ['latin'],
+})
+
 export const metadata = {
   title: 'Shaelin Bishop',
-  description: 'Victoria-based author.',
+  description: 'Vancouver-based author.',
 }
 
-export default async function RootLayout({ children }) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body className={`${nanum.variable} ${nanumGothic.variable} ${raleway.variable}`}>
         <Nav />
-        <main>{children}</main>
+        {children}
         <Footer />
       </body>
     </html>
