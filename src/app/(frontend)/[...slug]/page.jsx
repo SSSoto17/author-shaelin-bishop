@@ -2,11 +2,11 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 
 import Image from 'next/image'
-import { ConsoleLogWriter } from '@payloadcms/db-postgres/drizzle'
 import { redirect } from 'next/navigation'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config })
+
   const pages = await payload
     .find({
       collection: 'pages',
@@ -28,6 +28,7 @@ export async function generateStaticParams() {
 
 const getPageBySlug = async (slug) => {
   const payload = await getPayload({ config })
+
   const page = await payload
     .find({
       collection: 'pages',
@@ -50,8 +51,10 @@ export default async function Page({ params }) {
 
   let page = await getPageBySlug(url)
 
+  console.log(page)
+
   if (!page) {
-    return redirect(url)
+    return redirect('/')
   }
 
   return (
