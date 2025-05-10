@@ -75,8 +75,6 @@ async function Hero() {
     })
     .then((data) => data.image)
 
-  console.log(heroImg)
-
   return (
     <section className="full-bleed">
       <Image
