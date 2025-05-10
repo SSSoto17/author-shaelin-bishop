@@ -20,8 +20,6 @@ export async function Nav() {
     })
     .then((data) => data.items)
 
-  console.log(nav)
-
   return (
     <header className="sticky top-0 full-bleed bg-neutral-50 p-1">
       <nav className="flex items-center justify-between justify-self-stretch">

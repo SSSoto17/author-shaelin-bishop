@@ -1,4 +1,4 @@
-import { TestBlock } from '@/app/blocks/Sections'
+import { TestBlock } from '@/components/Sections'
 import type { CollectionConfig, Field } from 'payload'
 
 const PageTitle: Field = {
@@ -17,10 +17,10 @@ const PageSlug: Field = {
   hooks: {
     beforeValidate: [
       ({ value, data }) => {
-        const string = value || (data?.title !== 'Home' ? data?.title : '')
+        const string = value || data?.title
         const slugified = string.replaceAll(' ', '-').toLowerCase()
 
-        return value?.includes('/') ? slugified : '/' + slugified
+        return slugified.includes('/') ? slugified : '/' + slugified
       },
     ],
   },

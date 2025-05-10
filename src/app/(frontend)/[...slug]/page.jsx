@@ -2,7 +2,8 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 
 import Image from 'next/image'
-import MiniBio from '@/components/AuthorBio'
+import { ConsoleLogWriter } from '@payloadcms/db-postgres/drizzle'
+import { redirect } from 'next/navigation'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config })
@@ -10,40 +11,56 @@ export async function generateStaticParams() {
     .find({
       collection: 'pages',
       depth: 2,
+      limit: 1000,
+      pagination: false,
+      select: {
+        slug: true,
+      },
     })
     .then((data) => data.docs)
 
-  return pages.map((page) => ({
-    slug: [page.slug],
-  }))
+  return pages
+    .filter((page) => page.slug !== 'home')
+    .map((page) => ({
+      slug: [page.slug],
+    }))
+}
+
+const getPageBySlug = async (slug) => {
+  const payload = await getPayload({ config })
+  const page = await payload
+    .find({
+      collection: 'pages',
+      depth: 2,
+      limit: 1,
+      where: {
+        slug: {
+          equals: slug,
+        },
+      },
+    })
+    .then((data) => data.docs[0])
+
+  return page
 }
 
 export default async function Page({ params }) {
-  const { slug } = await params
-  // const payload = await getPayload({ config })
+  const { slug = 'home' } = await params
+  const url = '/' + slug
 
-  // const pages = await payload
-  //   .find({
-  //     collection: 'pages',
-  //     depth: 2,
-  //     where: {
-  //       slug: { equals: slug ? '/' + slug[0] : '/' },
-  //     },
-  //   })
-  //   .then((data) => data.docs)
+  let page = await getPageBySlug(url)
 
-  // const pageDetails = pages[0]
+  if (!page) {
+    return redirect(url)
+  }
 
   return (
     <main className="full-bleed">
-      {/* <h2 className="font-accent text-2xl font-extrabold">{pageDetails.title}</h2> */}
+      <h2 className="font-accent text-2xl font-extrabold">{page.title}</h2>
       <Hero />
-      {/* <MiniBio /> */}
     </main>
   )
 }
-
-const endpoint = process.env.REST_API
 
 async function Hero() {
   const payload = await getPayload({ config })
@@ -54,10 +71,11 @@ async function Hero() {
       showHiddenFields: true,
     })
     .then((data) => data.image)
+
   return (
     <section className="full-bleed">
       <Image
-        src={endpoint + heroImg.url}
+        src={heroImg.url}
         alt={heroImg.alt}
         width={heroImg.width}
         height={heroImg.height}

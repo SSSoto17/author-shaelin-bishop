@@ -1,4 +1,4 @@
-import { Footer, Nav } from '@/components/Nav'
+import { Footer, Nav } from '@/components/Navigation/Nav'
 import './globals.css'
 
 import { Nanum_Myeongjo, Nanum_Gothic_Coding, Nanum_Myeongjo, Raleway } from 'next/font/google'
@@ -27,7 +27,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${nanum.variable} ${nanumGothic.variable} ${raleway.variable}`}>
         <Nav />
         {children}

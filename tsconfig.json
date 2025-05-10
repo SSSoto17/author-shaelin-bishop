@@ -31,7 +31,7 @@
     ".next/types/**/*.ts",
     "src/app/(frontend)/layout.tsx",
     "src/app/(frontend)/test/page.jsx",
-    "src/components/Nav.jsx"
+    "src/components/Navigation/Nav.jsx"
   ],
   "exclude": ["node_modules"]
 }

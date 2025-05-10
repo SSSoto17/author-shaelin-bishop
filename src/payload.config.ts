@@ -10,9 +10,9 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
-import { Header } from './globals/Header'
-import { Hero } from './globals/Hero'
-import { ExampleCollection } from './app/blocks/Sections'
+import { Header } from './components/Navigation/Header'
+import { Hero } from './components/Hero'
+import { ExampleCollection } from './components/Sections'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
