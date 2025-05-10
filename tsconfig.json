@@ -30,7 +30,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/(frontend)/layout.tsx",
-    "src/app/(frontend)/page.jsx",
+    "src/app/(frontend)/test/page.jsx",
     "src/components/Nav.jsx"
   ],
   "exclude": ["node_modules"]

@@ -12,6 +12,7 @@ import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Header } from './globals/Header'
 import { Hero } from './globals/Hero'
+import { ExampleCollection } from './app/blocks/Sections'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -24,7 +25,7 @@ export default buildConfig({
     },
   },
   globals: [Header, Hero],
-  collections: [Users, Media, Pages],
+  collections: [Users, Media, Pages, ExampleCollection],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

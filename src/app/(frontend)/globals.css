@@ -50,6 +50,7 @@
     display: grid;
     grid-template-columns: minmax(var(--spacing), 1fr) minmax(0, 1120px) minmax(var(--spacing), 1fr);
     grid-template-rows: auto 1fr auto;
+    place-items: start;
     min-height: 100svh;
     font-family: var(--font-main);
     background-color: var(--color-neutral-50);
@@ -67,6 +68,7 @@
   grid-column: 1 / 4;
   display: grid;
   grid-template-columns: subgrid;
+  place-items: start;
 
   > *:not(.full-bleed) {
     grid-column: 2;

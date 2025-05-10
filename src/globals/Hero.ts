@@ -1,4 +1,5 @@
 import { GlobalConfig } from 'payload'
+// import { TestBlock } from './Blocks'
 
 export const Hero: GlobalConfig = {
   slug: 'hero',
@@ -10,5 +11,6 @@ export const Hero: GlobalConfig = {
       relationTo: 'media',
       required: true,
     },
+    // TestBlock,
   ],
 }

@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     pages: Page;
+    'example-collection': ExampleCollection;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -79,6 +80,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    'example-collection': ExampleCollectionSelect<false> | ExampleCollectionSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -164,7 +166,37 @@ export interface Media {
 export interface Page {
   id: number;
   title: string;
-  path: string;
+  slug: string;
+  pageLayout?: {
+    Sections?:
+      | {
+          Image?: (number | null) | Media;
+          'Test field'?: string | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'Test';
+        }[]
+      | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "example-collection".
+ */
+export interface ExampleCollection {
+  id: number;
+  layout?:
+    | {
+        Image?: (number | null) | Media;
+        'Test field'?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'Test';
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -186,6 +218,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'example-collection';
+        value: number | ExampleCollection;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -268,7 +304,44 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
-  path?: T;
+  slug?: T;
+  pageLayout?:
+    | T
+    | {
+        Sections?:
+          | T
+          | {
+              Test?:
+                | T
+                | {
+                    Image?: T;
+                    'Test field'?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "example-collection_select".
+ */
+export interface ExampleCollectionSelect<T extends boolean = true> {
+  layout?:
+    | T
+    | {
+        Test?:
+          | T
+          | {
+              Image?: T;
+              'Test field'?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
 }
