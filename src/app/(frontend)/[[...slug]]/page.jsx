@@ -20,23 +20,23 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }) {
   const { slug } = await params
-  const payload = await getPayload({ config })
+  // const payload = await getPayload({ config })
 
-  const pages = await payload
-    .find({
-      collection: 'pages',
-      depth: 2,
-      where: {
-        slug: { equals: slug ? '/' + slug[0] : '/' },
-      },
-    })
-    .then((data) => data.docs)
+  // const pages = await payload
+  //   .find({
+  //     collection: 'pages',
+  //     depth: 2,
+  //     where: {
+  //       slug: { equals: slug ? '/' + slug[0] : '/' },
+  //     },
+  //   })
+  //   .then((data) => data.docs)
 
-  const pageDetails = pages[0]
+  // const pageDetails = pages[0]
 
   return (
     <main className="full-bleed">
-      <h2 className="font-accent text-2xl font-extrabold">{pageDetails.title}</h2>
+      {/* <h2 className="font-accent text-2xl font-extrabold">{pageDetails.title}</h2> */}
       <Hero />
       {/* <MiniBio /> */}
     </main>
