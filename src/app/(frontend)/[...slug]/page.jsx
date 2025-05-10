@@ -72,13 +72,15 @@ async function Hero() {
     })
     .then((data) => data.image)
 
+  console.log(heroImg)
+
   return (
     <section className="full-bleed">
       <Image
-        src={heroImg.url}
+        src={heroImg.sizes.screen.url}
         alt={heroImg.alt}
-        width={heroImg.width}
-        height={heroImg.height}
+        width={heroImg.sizes.screen.width}
+        height={heroImg.sizes.screen.height}
         className="full-bleed h-screen object-cover"
       />
       <article className="grid gap-1 py-2">
