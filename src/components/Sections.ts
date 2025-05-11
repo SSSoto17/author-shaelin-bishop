@@ -1,5 +1,5 @@
 import { Field } from 'payload'
-import { AuthorBio } from './AuthorBio/AuthorBio'
+import { AuthorBio } from './AuthorBio/ConfigAuthorBio'
 
 export const Sections: Field = {
   name: 'sections',

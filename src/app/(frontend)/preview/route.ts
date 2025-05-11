@@ -19,10 +19,7 @@ export async function GET(
 
   const { searchParams } = new URL(req.url)
 
-  // const path = searchParams.get('path')
-  // const collection = searchParams.get('collection') as CollectionSlug
   const slug = searchParams.get('slug')
-  console.log('test: ', slug)
   //   const previewSecret = searchParams.get('previewSecret')
 
   //   if (previewSecret !== process.env.PREVIEW_SECRET) {
@@ -30,8 +27,6 @@ export async function GET(
   //       status: 403,
   //     })
   //   }
-
-  //   console.log(req.url)
 
   if (!slug) {
     return new Response('Insufficient search params', { status: 404 })

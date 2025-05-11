@@ -1,14 +1,12 @@
 export default function RenderHero({ type, image }) {
   const heroImg = `url(${image?.sizes.screen.url})`
 
-  console.log(type !== 'None')
-
-  if (type !== 'None')
+  if (type !== 'none')
     return (
       <section style={{ backgroundImage: heroImg }} className="full-bleed py-4 text-neutral-50">
-        {type === 'High Impact' && <HighImpact />}
-        {type === 'Low Impact' && <LowImpact />}
-        {type === 'Banner' && <Banner />}
+        {type === 'highImpact' && <HighImpact />}
+        {type === 'lowImpact' && <LowImpact />}
+        {type === 'banner' && <Banner />}
       </section>
     )
 

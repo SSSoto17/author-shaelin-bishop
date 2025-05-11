@@ -30,9 +30,11 @@ const PageSlug: Field = {
 const PageTabs: Field = {
   type: 'tabs',
   tabs: [
-    Hero,
     {
-      name: 'pageLayout',
+      label: 'Hero',
+      fields: [Hero],
+    },
+    {
       label: 'Content',
       fields: [Sections],
     },
@@ -46,6 +48,7 @@ export const Pages: CollectionConfig = {
     livePreview: {
       url: ({ data }) => '/preview?slug=' + data.slug,
     },
+    defaultColumns: ['title', 'slug', 'status', 'updatedAt'],
   },
   labels: { plural: 'Pages', singular: 'Page' },
   versions: {

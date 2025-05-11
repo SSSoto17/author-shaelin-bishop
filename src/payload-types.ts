@@ -190,36 +190,34 @@ export interface Page {
   id: number;
   title: string;
   slug: string;
-  hero?: {
-    type?: ('High Impact' | 'Low Impact' | 'Banner' | 'None') | null;
+  hero: {
+    type: 'highImpact' | 'lowImpact' | 'banner' | 'none';
     image?: (number | null) | Media;
   };
-  pageLayout?: {
-    sections?:
-      | {
-          image?: (number | null) | Media;
-          headline?: string | null;
-          description?: {
-            root: {
+  sections?:
+    | {
+        image?: (number | null) | Media;
+        headline?: string | null;
+        description?: {
+          root: {
+            type: string;
+            children: {
               type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
               version: number;
-            };
-            [k: string]: unknown;
-          } | null;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'bio';
-        }[]
-      | null;
-  };
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'bio';
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -366,21 +364,17 @@ export interface PagesSelect<T extends boolean = true> {
         type?: T;
         image?: T;
       };
-  pageLayout?:
+  sections?:
     | T
     | {
-        sections?:
+        bio?:
           | T
           | {
-              bio?:
-                | T
-                | {
-                    image?: T;
-                    headline?: T;
-                    description?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
+              image?: T;
+              headline?: T;
+              description?: T;
+              id?: T;
+              blockName?: T;
             };
       };
   updatedAt?: T;

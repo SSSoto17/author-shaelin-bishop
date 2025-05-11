@@ -3,14 +3,26 @@ import { Field } from 'payload'
 const Type: Field = {
   name: 'type',
   type: 'select',
-  options: ['High Impact', 'Low Impact', 'Banner', 'None'],
-  defaultValue: 'None',
+  required: true,
+  options: [
+    {
+      label: 'High Impact',
+      value: 'highImpact',
+    },
+    {
+      label: 'Low Impact',
+      value: 'lowImpact',
+    },
+    { label: 'Banner', value: 'banner' },
+    { label: 'None', value: 'none' },
+  ],
+  defaultValue: 'none',
 }
 
 const Image: Field = {
   admin: {
     condition: (siblingData) => {
-      return siblingData.hero.type == 'None' ? false : true
+      return siblingData.hero.type == 'none' ? false : true
     },
   },
   name: 'image',
@@ -19,7 +31,9 @@ const Image: Field = {
   required: true,
 }
 
-export const Hero = {
+export const Hero: Field = {
   name: 'hero',
+  type: 'group',
   fields: [Type, Image],
+  label: false,
 }
