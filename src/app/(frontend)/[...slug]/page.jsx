@@ -1,12 +1,15 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 
-import Image from 'next/image'
+import { headers, draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { cache } from 'react'
+
+import { RefreshRouteOnSave } from './RefreshRouteOnSave'
+import Hero from '@/components/Hero/RenderHero'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config })
-
   const pages = await payload
     .find({
       collection: 'pages',
@@ -26,14 +29,16 @@ export async function generateStaticParams() {
     }))
 }
 
-const getPageBySlug = async (slug) => {
+const getPageBySlug = cache(async (slug) => {
   const payload = await getPayload({ config })
+  const { isEnabled } = await draftMode()
 
   const page = await payload
     .find({
       collection: 'pages',
       depth: 2,
       limit: 1,
+      draft: isEnabled,
       where: {
         slug: {
           equals: slug,
@@ -43,31 +48,15 @@ const getPageBySlug = async (slug) => {
     .then((data) => data.docs[0])
 
   return page
-}
+})
 
 export default async function Page({ params }) {
+  const payload = await getPayload({ config })
   const { slug = 'home' } = await params
+
   const url = '/' + slug
 
-  let page = await getPageBySlug(url)
-
-  console.log(page)
-
-  if (!page) {
-    return redirect('/')
-  }
-
-  return (
-    <main className="full-bleed">
-      <h2 className="font-accent text-2xl font-extrabold">{page.title}</h2>
-      <Hero />
-    </main>
-  )
-}
-
-async function Hero() {
-  const payload = await getPayload({ config })
-  const heroImg = await payload
+  const heroData = await payload
     .findGlobal({
       slug: 'hero',
       depth: 2,
@@ -75,26 +64,19 @@ async function Hero() {
     })
     .then((data) => data.image)
 
+  let page = await getPageBySlug(url)
+
+  if (!page) {
+    return redirect('/')
+  }
+
+  const { title, pageLayout } = page
+
   return (
-    <section className="full-bleed">
-      <Image
-        src={heroImg.sizes.screen.url}
-        alt={heroImg.alt}
-        width={heroImg.sizes.screen.width}
-        height={heroImg.sizes.screen.height}
-        className="full-bleed h-screen object-cover"
-      />
-      <article className="grid gap-1 py-2">
-        <h1 className="font-accent text-5xl leading-6 font-extrabold tracking-tighter uppercase">
-          Nanum Gothic Coding
-        </h1>
-        <h2 className="text-xl font-extrabold">Nanum Myeongjo</h2>
-        <p className="max-w-prose tracking-wide">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad vitae, voluptatibus
-          repellendus enim, maiores vel animi neque id magni dolores adipisci accusantium cupiditate
-          ipsa est, excepturi dolorum. Et, eligendi repellendus!
-        </p>{' '}
-      </article>
-    </section>
+    <main className="full-bleed">
+      <RefreshRouteOnSave />
+      <h2 className="font-accent text-2xl font-extrabold">{title}</h2>
+      <Hero {...heroData} />
+    </main>
   )
 }

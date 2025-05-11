@@ -5,9 +5,19 @@ export const Users: CollectionConfig = {
   admin: {
     useAsTitle: 'email',
   },
-  auth: true,
+  auth: {
+    cookies: {
+      secure: false,
+    },
+  },
   fields: [
     // Email added by default
     // Add more fields as needed
+    {
+      saveToJWT: true,
+      name: 'role',
+      type: 'select',
+      options: ['admin', 'user'],
+    },
   ],
 }

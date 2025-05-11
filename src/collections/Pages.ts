@@ -47,11 +47,27 @@ export const Pages: CollectionConfig = {
   slug: 'pages',
   admin: {
     useAsTitle: 'title',
+    livePreview: {
+      url: ({ data }) => '/preview?slug=' + data.slug,
+    },
   },
   labels: { plural: 'Pages', singular: 'Page' },
-  versions: { drafts: true },
+  versions: {
+    drafts: {
+      autosave: {
+        interval: 0,
+      },
+    },
+  },
   access: {
-    read: () => true,
+    read: ({ req }) => {
+      if (req.user) return true
+      return {
+        status: {
+          equals: 'published',
+        },
+      }
+    },
   },
   fields: [PageTitle, PageSlug, PageTabs],
 }

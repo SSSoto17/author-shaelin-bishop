@@ -10,10 +10,12 @@ export const Media: CollectionConfig = {
       name: 'alt',
       type: 'text',
       required: true,
+      defaultValue: 'Alt text pending',
     },
   ],
   upload: {
     staticDir: 'media',
+    formatOptions: { format: 'webp' },
     imageSizes: [
       {
         name: 'thumbnail',
@@ -27,14 +29,12 @@ export const Media: CollectionConfig = {
         width: 2048,
         fit: 'cover',
         position: 'centre',
-        formatOptions: { format: 'webp' },
       },
       {
         name: 'card',
         width: 648,
         height: 1024,
         fit: 'cover',
-        formatOptions: { format: 'webp' },
       },
     ],
     adminThumbnail: 'thumbnail',
