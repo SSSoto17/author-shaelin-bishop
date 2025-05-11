@@ -1,5 +1,6 @@
-import { TestBlock } from '@/components/Sections'
 import type { CollectionConfig, Field } from 'payload'
+import { Sections } from '@/components/Sections'
+import { Hero } from '@/components/Hero/ConfigHero'
 
 const PageTitle: Field = {
   name: 'title',
@@ -29,16 +30,11 @@ const PageSlug: Field = {
 const PageTabs: Field = {
   type: 'tabs',
   tabs: [
+    Hero,
     {
       name: 'pageLayout',
-      fields: [
-        {
-          name: 'Sections',
-          type: 'blocks',
-          required: false,
-          blocks: [TestBlock],
-        },
-      ],
+      label: 'Content',
+      fields: [Sections],
     },
   ],
 }

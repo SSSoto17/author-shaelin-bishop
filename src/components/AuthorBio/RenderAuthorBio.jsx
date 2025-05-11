@@ -1,4 +1,4 @@
-export function MiniBio() {
+export default function AuthorBio() {
   return (
     <section className="grid grid-cols-4 gap-x-2 gap-y-1">
       <div className="aspect-square bg-accent-800"></div>

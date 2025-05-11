@@ -70,7 +70,6 @@ export interface Config {
     users: User;
     media: Media;
     pages: Page;
-    'example-collection': ExampleCollection;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -80,7 +79,6 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
-    'example-collection': ExampleCollectionSelect<false> | ExampleCollectionSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -90,11 +88,9 @@ export interface Config {
   };
   globals: {
     header: Header;
-    hero: Hero;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
-    hero: HeroSelect<false> | HeroSelect<true>;
   };
   locale: null;
   user: User & {
@@ -194,38 +190,39 @@ export interface Page {
   id: number;
   title: string;
   slug: string;
+  hero?: {
+    type?: ('High Impact' | 'Low Impact' | 'Banner' | 'None') | null;
+    image?: (number | null) | Media;
+  };
   pageLayout?: {
-    Sections?:
+    sections?:
       | {
-          Image?: (number | null) | Media;
-          'Test field'?: string | null;
+          image?: (number | null) | Media;
+          headline?: string | null;
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
           id?: string | null;
           blockName?: string | null;
-          blockType: 'Test';
+          blockType: 'bio';
         }[]
       | null;
   };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "example-collection".
- */
-export interface ExampleCollection {
-  id: number;
-  layout?:
-    | {
-        Image?: (number | null) | Media;
-        'Test field'?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'Test';
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -245,10 +242,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
-      } | null)
-    | ({
-        relationTo: 'example-collection';
-        value: number | ExampleCollection;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -367,17 +360,24 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  hero?:
+    | T
+    | {
+        type?: T;
+        image?: T;
+      };
   pageLayout?:
     | T
     | {
-        Sections?:
+        sections?:
           | T
           | {
-              Test?:
+              bio?:
                 | T
                 | {
-                    Image?: T;
-                    'Test field'?: T;
+                    image?: T;
+                    headline?: T;
+                    description?: T;
                     id?: T;
                     blockName?: T;
                   };
@@ -386,26 +386,6 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "example-collection_select".
- */
-export interface ExampleCollectionSelect<T extends boolean = true> {
-  layout?:
-    | T
-    | {
-        Test?:
-          | T
-          | {
-              Image?: T;
-              'Test field'?: T;
-              id?: T;
-              blockName?: T;
-            };
-      };
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -454,16 +434,6 @@ export interface Header {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "hero".
- */
-export interface Hero {
-  id: number;
-  image: number | Media;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -473,16 +443,6 @@ export interface HeaderSelect<T extends boolean = true> {
         page?: T;
         id?: T;
       };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "hero_select".
- */
-export interface HeroSelect<T extends boolean = true> {
-  image?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

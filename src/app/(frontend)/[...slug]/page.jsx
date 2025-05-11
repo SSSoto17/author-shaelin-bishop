@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation'
 import { cache } from 'react'
 
 import { RefreshRouteOnSave } from './RefreshRouteOnSave'
-import Hero from '@/components/Hero/RenderHero'
+import RenderHero from '@/components/Hero/RenderHero'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config })
@@ -51,32 +51,21 @@ const getPageBySlug = cache(async (slug) => {
 })
 
 export default async function Page({ params }) {
-  const payload = await getPayload({ config })
   const { slug = 'home' } = await params
-
   const url = '/' + slug
-
-  const heroData = await payload
-    .findGlobal({
-      slug: 'hero',
-      depth: 2,
-      showHiddenFields: true,
-    })
-    .then((data) => data.image)
-
   let page = await getPageBySlug(url)
 
   if (!page) {
     return redirect('/')
   }
 
-  const { title, pageLayout } = page
+  const { title, hero } = page
 
   return (
     <main className="full-bleed">
       <RefreshRouteOnSave />
+      <RenderHero {...hero} />
       <h2 className="font-accent text-2xl font-extrabold">{title}</h2>
-      <Hero {...heroData} />
     </main>
   )
 }

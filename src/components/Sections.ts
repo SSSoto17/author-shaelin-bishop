@@ -1,32 +1,10 @@
-import { Block, CollectionConfig } from 'payload'
+import { Field } from 'payload'
+import { AuthorBio } from './AuthorBio/AuthorBio'
 
-export const TestBlock: Block = {
-  slug: 'Test',
-  fields: [
-    {
-      name: 'Image',
-      type: 'relationship',
-      relationTo: 'media',
-    },
-    {
-      name: 'Test field',
-      type: 'text',
-    },
-  ],
-}
-
-export const ExampleCollection: CollectionConfig = {
-  slug: 'example-collection',
-  fields: [
-    {
-      name: 'layout', // required
-      type: 'blocks', // required
-      minRows: 1,
-      maxRows: 20,
-      blocks: [
-        // required
-        TestBlock,
-      ],
-    },
-  ],
+export const Sections: Field = {
+  name: 'sections',
+  type: 'blocks',
+  minRows: 1,
+  maxRows: 20,
+  blocks: [AuthorBio],
 }

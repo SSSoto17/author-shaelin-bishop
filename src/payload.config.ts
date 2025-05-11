@@ -11,8 +11,6 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Header } from './components/Navigation/Header'
-import { Hero } from './components/Hero/Hero'
-import { ExampleCollection } from './components/Sections'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -25,8 +23,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  globals: [Header, Hero],
-  collections: [Users, Media, Pages, ExampleCollection],
+  globals: [Header],
+  collections: [Users, Media, Pages],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
