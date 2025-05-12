@@ -19,7 +19,6 @@ export async function Nav({ page }) {
   const payload = await getPayload({ config })
 
   const { user } = await payload.auth({ headers })
-  console.log(user)
 
   const nav = await payload.findGlobal({
     slug: 'header',
@@ -28,7 +27,7 @@ export async function Nav({ page }) {
   })
 
   return (
-    <header className="sticky top-0 full-bleed bg-neutral-50">
+    <header className="sticky top-0 full-bleed bg-neutral-50 drop-shadow-md">
       {user && <AdminBar page={page} {...user} />}
       <NavBar {...nav} />
     </header>
@@ -37,9 +36,9 @@ export async function Nav({ page }) {
 
 function NavBar({ items }) {
   return (
-    <nav className="grid grid-cols-[auto_1fr] items-center justify-items-end gap-4 justify-self-stretch py-1">
+    <nav className="grid grid-cols-[auto_1fr] items-center justify-items-end gap-2xl justify-self-stretch py-2xs">
       <Logo />
-      <ul className="flex flex-wrap gap-x-4 font-logo tracking-tight">
+      <ul className="flex flex-wrap gap-x-l font-logo tracking-tight">
         {items.map((item, id) => {
           return (
             <li key={id}>
@@ -56,28 +55,28 @@ async function AdminBar({ page, email, userName, role }) {
   const { id } = await getPage({ id: true }, { slug: { equals: `/${page}` } })
 
   return (
-    <section className="full-bleed bg-neutral-900 py-0.5 font-accent text-neutral-50">
-      <nav className="grid grid-cols-[auto_1fr] items-center justify-items-end gap-4 justify-self-stretch">
-        <Link href="/admin" className="flex items-center gap-1">
+    <section className="full-bleed bg-neutral-900 py-2xs font-accent text-neutral-50">
+      <nav className="grid grid-cols-[auto_1fr] items-center justify-items-end gap-l justify-self-stretch">
+        <Link href="/admin" className="flex items-center gap-xs">
           <MdCompassCalibration size={20} />
           <p>
             {userName || email} <span className="font-logo">|</span> {role}
           </p>
         </Link>
-        <ul className="flex gap-2">
-          <li className="relative flex items-center gap-0.5">
+        <ul className="flex gap-m">
+          <li className="relative flex items-center gap-3xs">
             <Link href={`/admin/collections/pages/${id}`} className="after:absolute after:inset-0">
               Edit Page
             </Link>
             <MdEdit size={16} />
           </li>
-          <li className="relative flex items-center gap-0.5">
+          <li className="relative flex items-center gap-3xs">
             <Link href={`/admin/collections/media`} className="after:absolute after:inset-0">
               Media Library
             </Link>
             <MdFolder size={16} />
           </li>
-          <li className="relative flex items-center gap-0.5">
+          <li className="relative flex items-center gap-3xs">
             <Link href={`/admin/account`} className="after:absolute after:inset-0">
               Account
             </Link>
