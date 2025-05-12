@@ -14,10 +14,19 @@ export const Users: CollectionConfig = {
     // Email added by default
     // Add more fields as needed
     {
-      saveToJWT: true,
+      name: 'userName',
+      label: 'Name',
+      type: 'text',
+    },
+    {
       name: 'role',
       type: 'select',
-      options: ['admin', 'user'],
+      options: [
+        { label: 'Admin', value: 'Admin' },
+        { label: 'User', value: 'User' },
+      ],
+      defaultValue: 'User',
+      required: true,
     },
   ],
 }
