@@ -40,7 +40,7 @@ export default async function Page({ params }) {
       <main className="full-bleed">
         <RefreshRouteOnSave />
         <RenderHero {...hero} />
-        <h2 className="font-accent text-2xl font-extrabold">{title}</h2>
+        {/* <h2 className="font-accent text-2xl font-extrabold">{title}</h2> */}
         <RenderContent content={sections} />
       </main>
     </>

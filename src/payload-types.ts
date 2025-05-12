@@ -199,21 +199,11 @@ export interface Page {
     | {
         image?: (number | null) | Media;
         headline?: string | null;
-        description?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
+        description?: string | null;
+        images?: {
+          imageGroup?: (number | Media)[] | null;
+          imagesTitle?: string | null;
+        };
         id?: string | null;
         blockName?: string | null;
         blockType: 'bio';
@@ -375,6 +365,12 @@ export interface PagesSelect<T extends boolean = true> {
               image?: T;
               headline?: T;
               description?: T;
+              images?:
+                | T
+                | {
+                    imageGroup?: T;
+                    imagesTitle?: T;
+                  };
               id?: T;
               blockName?: T;
             };

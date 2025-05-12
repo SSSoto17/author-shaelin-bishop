@@ -14,7 +14,18 @@ export const AuthorBio: Block = {
     },
     {
       name: 'description',
-      type: 'richText',
+      type: 'textarea',
+    },
+    {
+      type: 'group',
+      name: 'images',
+      fields: [
+        { name: 'imageGroup', type: 'upload', relationTo: 'media', hasMany: true },
+        {
+          name: 'imagesTitle',
+          type: 'text',
+        },
+      ],
     },
   ],
 }
