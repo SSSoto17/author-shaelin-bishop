@@ -46,7 +46,7 @@ function NavBar({ items }) {
 
 export function Footer() {
   return (
-    <footer className="full-bleed bg-accent-500 p-1 font-accent text-accent-50">
+    <footer className="full-bleed bg-accent-900 p-1 font-accent text-accent-50">
       <p>Footer content</p>
     </footer>
   )
