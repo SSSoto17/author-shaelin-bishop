@@ -27,6 +27,23 @@ const PageSlug: Field = {
   },
 }
 
+const ViewPage: Field = {
+  name: 'viewPage',
+  type: 'ui',
+  label: 'Go To Page',
+  admin: {
+    position: 'sidebar',
+    components: {
+      Field: {
+        path: '@/components/ViewPageButton',
+        clientProps: {
+          label: 'Go to Page',
+        },
+      },
+    },
+  },
+}
+
 const PageTabs: Field = {
   type: 'tabs',
   tabs: [
@@ -45,6 +62,7 @@ export const Pages: CollectionConfig = {
   slug: 'pages',
   admin: {
     useAsTitle: 'title',
+    preview: ({ slug }) => `/preview?slug=${slug}`,
     livePreview: {
       url: ({ data }) => '/preview?slug=' + data.slug,
     },
@@ -54,7 +72,7 @@ export const Pages: CollectionConfig = {
   versions: {
     drafts: {
       autosave: {
-        interval: 0,
+        interval: 100,
       },
     },
   },
@@ -68,5 +86,5 @@ export const Pages: CollectionConfig = {
       }
     },
   },
-  fields: [PageTitle, PageSlug, PageTabs],
+  fields: [PageTitle, PageSlug, ViewPage, PageTabs],
 }
