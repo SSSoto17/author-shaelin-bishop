@@ -6,7 +6,6 @@ import { getPages, getPage } from '@/lib/PageQueries'
 
 import RenderHero from '@/components/Hero/RenderHero'
 import RenderContent from '@/components/RenderContent'
-import { Nav } from '@/components/Navigation/Nav'
 
 export async function generateStaticParams() {
   const selector = { slug: true }
@@ -22,27 +21,30 @@ export async function generateStaticParams() {
   }))
 }
 
-export default async function Page({ params }) {
-  const { slug = 'home' } = await params
-  const { isEnabled } = await draftMode()
-
+async function getPageBySlug(slug, draft) {
   const filter = { slug: { equals: '/' + slug } }
-  const page = await getPage(null, filter, isEnabled)
+  const page = await getPage(null, filter, draft)
 
   if (!page) {
     notFound()
   }
-  const { title, hero, sections } = page
+
+  return page
+}
+
+export default async function Page({ params }) {
+  const { slug = 'home' } = await params
+  const { isEnabled } = await draftMode()
+
+  const { hero, sections } = await getPageBySlug(slug, isEnabled)
+
+  // console.log(sections)
 
   return (
-    <>
-      <Nav page={slug} />
-      <main className="full-bleed">
-        <RefreshRouteOnSave />
-        <RenderHero {...hero} />
-        <h2 className="font-accent text-2xl font-extrabold">{title}</h2>
-        <RenderContent content={sections} />
-      </main>
-    </>
+    <main className="full-bleed">
+      <RefreshRouteOnSave />
+      <RenderHero {...hero} />
+      <RenderContent content={sections} />
+    </main>
   )
 }

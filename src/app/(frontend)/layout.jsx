@@ -1,6 +1,5 @@
 import './globals.css'
 import { Nanum_Myeongjo, Nanum_Gothic_Coding, Nanum_Myeongjo, Raleway } from 'next/font/google'
-import { Footer } from '@/components/Navigation/Nav'
 
 const nanum = Nanum_Myeongjo({
   variable: '--font-main',
@@ -29,7 +28,6 @@ export default async function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body className={`${nanum.variable} ${nanumGothic.variable} ${raleway.variable}`}>
         {children}
-        <Footer />
       </body>
     </html>
   )

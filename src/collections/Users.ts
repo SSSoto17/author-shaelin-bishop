@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+const localDev = process.env.NEXT_PUBLIC_PAYLOAD_URL
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -7,7 +8,7 @@ export const Users: CollectionConfig = {
   },
   auth: {
     cookies: {
-      secure: false,
+      secure: Boolean(localDev),
     },
   },
   fields: [

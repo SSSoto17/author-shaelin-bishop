@@ -10,7 +10,7 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
-import { Header } from './components/Navigation/Header'
+import { Header } from './components/Navigation/Header/ConfigHeader'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
