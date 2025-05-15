@@ -3,7 +3,10 @@ export default function RenderHero({ type, image }) {
 
   if (type !== 'none')
     return (
-      <section style={{ backgroundImage: heroImg }} className="full-bleed py-4 text-neutral-50">
+      <section
+        style={{ backgroundImage: heroImg }}
+        className="full-bleed bg-accent-500 bg-cover py-4 text-neutral-50 bg-blend-darken"
+      >
         {type === 'highImpact' && <HighImpact />}
         {type === 'lowImpact' && <LowImpact />}
         {type === 'banner' && <Banner />}
@@ -16,12 +19,12 @@ export default function RenderHero({ type, image }) {
 // LARGE HERO
 function HighImpact() {
   return (
-    <article className="grid gap-1 py-2">
-      <h1 className="font-accent text-5xl leading-6 font-extrabold tracking-tighter uppercase">
+    <article className="grid h-224 max-h-screen place-content-center gap-1 py-2 flow-space">
+      <h1 className="font-accent text-5xl leading-3xl font-extrabold tracking-tighter text-balance uppercase">
         Nanum Gothic Coding
       </h1>
       <h2 className="text-xl font-extrabold">Nanum Myeongjo</h2>
-      <p className="max-w-prose tracking-wide">
+      <p className="max-w-prose text-lg font-bold tracking-wide">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad vitae, voluptatibus repellendus
         enim, maiores vel animi neque id magni dolores adipisci accusantium cupiditate ipsa est,
         excepturi dolorum. Et, eligendi repellendus!
@@ -50,7 +53,7 @@ function LowImpact() {
 function Banner() {
   return (
     <article>
-      <h1>Banner</h1>
+      <h1 className="text-2xl font-black">Banner</h1>
     </article>
   )
 }

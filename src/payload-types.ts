@@ -198,28 +198,18 @@ export interface Page {
     image?: (number | null) | Media
   }
   sections?:
-    | (
-        | {
-            image?: (number | null) | Media
-            headline?: string | null
-            description?: string | null
-            images?: {
-              imageGroup?: (number | Media)[] | null
-              imagesTitle?: string | null
-            }
-            id?: string | null
-            blockName?: string | null
-            blockType: 'bio'
-          }
-        | {
-            heading?: string | null
-            body?: string | null
-            buttonLabel?: string | null
-            id?: string | null
-            blockName?: string | null
-            blockType: 'newsletter'
-          }
-      )[]
+    | {
+        image?: (number | null) | Media
+        headline?: string | null
+        description?: string | null
+        images?: {
+          imageGroup?: (number | Media)[] | null
+          imagesTitle?: string | null
+        }
+        id?: string | null
+        blockName?: string | null
+        blockType: 'bio'
+      }[]
     | null
   updatedAt: string
   createdAt: string
@@ -377,15 +367,12 @@ export interface PagesSelect<T extends boolean = true> {
               image?: T
               headline?: T
               description?: T
-              id?: T
-              blockName?: T
-            }
-        newsletter?:
-          | T
-          | {
-              heading?: T
-              body?: T
-              buttonLabel?: T
+              images?:
+                | T
+                | {
+                    imageGroup?: T
+                    imagesTitle?: T
+                  }
               id?: T
               blockName?: T
             }
